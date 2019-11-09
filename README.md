@@ -23,6 +23,8 @@ Valid flags:
 
 - `--file | -f`: Name of the Dockerfile (Default is `PATH/Dockerfile`)
 - `--prefix | -p`: Prefix for unnamed stages (Default is `unnamed-`)
+- `--output-path | -o`: Path to output rewritten dockerfile (Default is stdout)
+
 
 ### List Stages
 
