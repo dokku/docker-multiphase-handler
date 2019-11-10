@@ -31,7 +31,7 @@ release.json: dist-linux/docker-multiphase-handler dist-macos/docker-multiphase-
 	@echo "Creating draft release for $(VERSION)"
 	@curl $(AUTH) -XPOST $(API_HOST)/repos/dokku/docker-multiphase-handler/releases -d '{ \
 		"tag_name": "$(VERSION)", \
-		"name": "Docker build cacher $(VERSION)", \
+		"name": "Docker Multiphase Handler $(VERSION)", \
 		"draft": false, \
 		"prerelease": false \
 	}' > release.json
