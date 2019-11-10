@@ -32,7 +32,7 @@ parser = subparser
   (  Opt.command
       "list-stages"
       (Opt.info
-        (ListStages <$> parseGlobalOpts)
+        (ListStages <$> parseGlobalOpts <**> Opt.helper)
         (Opt.progDesc
           "Lists all stages in a dockerfile. If the stage is unnamed, then a temporary stage name is output."
         )
@@ -40,7 +40,7 @@ parser = subparser
   <> Opt.command
        "needs-rewrite"
        (Opt.info
-         (NeedsRewrite <$> parseGlobalOpts)
+         (NeedsRewrite <$> parseGlobalOpts <**> Opt.helper)
          (Opt.progDesc
            "Exit 0 if the specified Dockerfile does not need to be rewritten, exits 1 if it does need to be rewritten"
          )
@@ -48,7 +48,7 @@ parser = subparser
   <> Opt.command
        "rewrite"
        (Opt.info
-         (Rewrite <$> parseGlobalOpts <*> parseTarget)
+         (Rewrite <$> parseGlobalOpts <*> parseTarget <**> Opt.helper)
          (Opt.progDesc
            "Rewrites the specified Dockerfile to ensure each stage is named. May reformat dockerfile and remove comments."
          )
