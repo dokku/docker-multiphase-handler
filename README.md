@@ -31,7 +31,7 @@ Valid flags:
 Lists all stages in a dockerfile. If the stage is unnamed, then a temporary stage name is output.
 
 ```shell
-docker-multiphase-executor list-stages
+docker-multiphase-handler list-stages
 ```
 
 ```
@@ -45,7 +45,7 @@ built-app
 Exit `0` if the specified Dockerfile does not need to be rewritten, exits `1` if it does need to be rewritten
 
 ```shell
-docker-multiphase-executor needs-rewrite
+docker-multiphase-handler needs-rewrite
 ```
 
 ### Rewrite Dockerfile
@@ -53,7 +53,7 @@ docker-multiphase-executor needs-rewrite
 Rewrites the specified Dockerfile to ensure each stage is named. May reformat dockerfile and remove comments.
 
 ```shell
-docker-multiphase-executor rewrite
+docker-multiphase-handler rewrite
 ```
 
 Outputs the following to stdout.
