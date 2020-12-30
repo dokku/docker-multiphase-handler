@@ -10,9 +10,27 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - id: get_version
+        uses: battila7/get-version-action@v2
       - uses: haskell/actions/setup@v1
         with:
           ghc-version: '8.6.5'
           enable-stack: true
           stack-version: 'latest'
-      - run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
+      - name: Install package dependencies
+        run: apt update && apt-get -y install ruby ruby-dev rubygems build-essential jq
+      - name: Build binaries
+        run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
+      - name: Build packages
+        run: VERSION=${{ steps.get_version.outputs.version }} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/
+      - name: Publish
+        run: |
+          if [[ '${{ steps.get_version.outputs.version }}' =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo -e "\u001b[32mDetected tag\u001b[0m"
+            VERSION=${{ steps.get_version.outputs.version }} make publish
+          fi
