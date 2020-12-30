@@ -8,8 +8,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: haskell/actions/setup@v1
         with:
-          ghc-version: '8.8.3' # Exact version of ghc to use
-          # cabal-version: 'latest'. Omitted, but defalts to 'latest'
+          ghc-version: '8.6.5'
           enable-stack: true
           stack-version: 'latest'
       - run: make dist-linux/docker-multiphase-handler dist-macos/docker-multiphase-handler
