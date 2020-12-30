@@ -12,5 +12,4 @@ jobs:
           # cabal-version: 'latest'. Omitted, but defalts to 'latest'
           enable-stack: true
           stack-version: 'latest'
-      - run: make dist-linux/docker-multiphase-handler
-      - run: make dist-macos/docker-multiphase-handler
+      - run: make dist-linux/docker-multiphase-handler dist-macos/docker-multiphase-handler
