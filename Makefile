@@ -17,17 +17,17 @@ guard-%:
 		exit 1; \
 	fi;
 
-dist-linux/docker-multiphase-handler:
-	mkdir -p dist-linux
-	stack --docker --docker-auto-pull --docker-image $(DOCKER_LINUX_IMAGE) install --local-bin-path dist-linux
-	upx --best dist-linux/docker-multiphase-handler
+build/linux/docker-multiphase-handler:
+	mkdir -p build/linux
+	stack --docker --docker-auto-pull --docker-image $(DOCKER_LINUX_IMAGE) install --local-bin-path build/linux
+	upx --best build/linux/docker-multiphase-handler
 
-dist-macos/docker-multiphase-handler:
-	mkdir -p dist-macos
-	stack install --local-bin-path dist-macos
-	upx --best dist-macos/docker-multiphase-handler
+build/macos/docker-multiphase-handler:
+	mkdir -p build/macos
+	stack install --local-bin-path build/macos
+	upx --best build/macos/docker-multiphase-handler
 
-release.json: dist-linux/docker-multiphase-handler dist-macos/docker-multiphase-handler
+release.json: build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
 	@echo "Creating draft release for $(VERSION)"
 	@curl $(AUTH) -XPOST $(API_HOST)/repos/dokku/docker-multiphase-handler/releases -d '{ \
 		"tag_name": "$(VERSION)", \
@@ -45,17 +45,16 @@ publish: guard-VERSION guard-GITHUB_TOKEN release.json
 		$(UPLOAD_HOST)/repos/dokku/docker-multiphase-handler/releases/$(RELEASE_ID)/assets?name=docker-multiphase-handler-linux \
 		-H "Accept: application/vnd.github.manifold-preview" \
 		-H 'Content-Type: application/octet-stream' \
-		--data-binary '@dist-linux/docker-multiphase-handler' > /dev/null
+		--data-binary '@build/linux/docker-multiphase-handler' > /dev/null
 	@echo "Uploading the MacOS binary"
 	@curl $(AUTH) -XPOST \
 		$(UPLOAD_HOST)/repos/dokku/docker-multiphase-handler/releases/$(RELEASE_ID)/assets?name=docker-multiphase-handler-macos \
 		-H "Accept: application/vnd.github.manifold-preview" \
 		-H 'Content-Type: application/octet-stream' \
-		--data-binary '@dist-macos/docker-multiphase-handler' > /dev/null
+		--data-binary '@build/macos/docker-multiphase-handler' > /dev/null
 	@echo Release done, you can go to:
 	@cat release.json | jq .html_url
 
-
 clean:
-	rm -rf dist-*
+	rm -rf build
 	rm -f release.json

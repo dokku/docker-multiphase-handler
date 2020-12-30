@@ -15,4 +15,4 @@ jobs:
           ghc-version: '8.6.5'
           enable-stack: true
           stack-version: 'latest'
-      - run: make dist-linux/docker-multiphase-handler dist-macos/docker-multiphase-handler
+      - run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
