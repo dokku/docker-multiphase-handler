@@ -5,8 +5,8 @@ name: build
 on: [push]
 
 jobs:
-  runhaskell:
-    name: Hello World
+  build:
+    name: build
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
