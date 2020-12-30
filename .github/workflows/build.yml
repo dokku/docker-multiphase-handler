@@ -18,7 +18,7 @@ jobs:
           enable-stack: true
           stack-version: 'latest'
       - name: Install package dependencies
-        run: sudo apt update && sudo apt-get -y install ruby ruby-dev rubygems build-essential jq && sudo gem install --no-ri --no-rdoc fpm
+        run: sudo apt update && sudo apt-get -y install ruby ruby-dev rubygems build-essential jq && sudo gem install --no-document fpm
       - name: Build binaries
         run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
       - name: Build packages
