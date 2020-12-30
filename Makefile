@@ -28,6 +28,7 @@ build/macos/docker-multiphase-handler:
 	upx --best build/macos/docker-multiphase-handler
 
 build/debian/docker-multiphase-handler.deb: guard-VERSION
+	mkdir -p build/debian
 	fpm -t deb -s dir -n docker-multiphase-handler \
 	    --version $(VERSION) \
 	    --architecture amd64 \
@@ -38,6 +39,7 @@ build/debian/docker-multiphase-handler.deb: guard-VERSION
 	    build/linux/docker-multiphase-handler=/usr/bin/docker-multiphase-handler
 
 build/centos/docker-multiphase-handler.rpm: guard-VERSION
+	mkdir -p build/centos
 	fpm -t rpm -s dir -n docker-multiphase-handler \
 	    --version $(VERSION) \
 	    --architecture x86_64 \
