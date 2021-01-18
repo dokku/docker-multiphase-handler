@@ -43,7 +43,7 @@ build/centos/docker-multiphase-handler.rpm: guard-VERSION
 	fpm -t rpm -s dir -n docker-multiphase-handler \
 	    --version $(VERSION) \
 	    --architecture x86_64 \
-	    --package build/debian/docker-multiphase-handler.rpm \
+	    --package build/centos/docker-multiphase-handler.rpm \
 	    --url "https://github.com/dokku/docker-multiphase-handler" \
 	    --description 'Enables proper handling of multiphase dockerfiles' \
 	    --license 'MIT License' \
