@@ -49,7 +49,7 @@ build/centos/docker-multiphase-handler.rpm: guard-VERSION
 	    --license 'MIT License' \
 	    build/linux/docker-multiphase-handler=/usr/bin/docker-multiphase-handler
 
-release.json: build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+release.json: build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
 	@echo "Creating draft release for $(VERSION)"
 	@curl $(AUTH) -XPOST $(API_HOST)/repos/dokku/docker-multiphase-handler/releases -d '{ \
 		"tag_name": "$(VERSION)", \
