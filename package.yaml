@@ -1,5 +1,5 @@
 name:                docker-multiphase-handler
-version:             0.1.0.0
+version:             1.0.2
 github:              "dokku/docker-multiphase-handler"
 license:             BSD3
 author:              "José Lorenzo Rodríguez"
