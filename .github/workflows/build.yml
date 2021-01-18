@@ -22,7 +22,12 @@ jobs:
       - name: Build binaries
         run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
       - name: Build packages
-        run: VERSION=${{ steps.get_version.outputs.version }} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+        run: |
+          if [[ '${{ steps.get_version.outputs.version }}' =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            VERSION=${{ steps.get_version.outputs.version }} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+          else
+            VERSION=${GITHUB_REF#refs/heads/} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+          fi
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
