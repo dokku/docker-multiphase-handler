@@ -37,5 +37,5 @@ jobs:
         run: |
           if [[ '${{ steps.get_version.outputs.version }}' =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
             echo -e "\u001b[32mDetected tag\u001b[0m"
-            VERSION=${{ steps.get_version.outputs.version }} GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} make publish
+            VERSION=${{ steps.get_version.outputs.version }} GITHUB_TOKEN=${{ secrets.GH_ACCESS_TOKEN }} make publish
           fi
