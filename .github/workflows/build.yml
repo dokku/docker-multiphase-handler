@@ -18,15 +18,15 @@ jobs:
           enable-stack: true
           stack-version: 'latest'
       - name: Install package dependencies
-        run: sudo apt update && sudo apt-get -y install ruby ruby-dev rubygems build-essential rpm jq && sudo gem install --no-document fpm
+        run: sudo apt update && sudo apt-get -y install ruby ruby-dev rubygems build-essential jq && sudo gem install --no-document fpm
       - name: Build binaries
         run: make build/linux/docker-multiphase-handler build/macos/docker-multiphase-handler
       - name: Build packages
         run: |
           if [[ '${{ steps.get_version.outputs.version }}' =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-            VERSION=${{ steps.get_version.outputs.version }} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+            VERSION=${{ steps.get_version.outputs.version }} make build/debian/docker-multiphase-handler.deb
           else
-            VERSION=${GITHUB_REF#refs/heads/} make build/debian/docker-multiphase-handler.deb build/centos/docker-multiphase-handler.rpm
+            VERSION=${GITHUB_REF#refs/heads/} make build/debian/docker-multiphase-handler.deb
           fi
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
