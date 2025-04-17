@@ -9,7 +9,7 @@ jobs:
     name: build
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - id: get_version
         uses: battila7/get-version-action@v2
       - uses: haskell/actions/setup@v1
