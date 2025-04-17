@@ -29,7 +29,7 @@ jobs:
             VERSION=${GITHUB_REF#refs/heads/} make build/debian/docker-multiphase-handler.deb
           fi
       - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: build/
